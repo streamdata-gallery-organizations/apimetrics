@@ -14,31 +14,6 @@
          }
        }
 
-      function filterbyrank()
-        {
-        reset();
-
-        ranking = document.getElementById('rankFilter').value;
-        var elements = document.getElementsByClassName('taggedLinkCard taggedLinkCard--red');
-        if(ranking != 'all')
-          {
-          for (var i = 0; i < elements.length; i++)
-            {
-            thisrank = elements[i].getAttribute("rank");
-            thisid = elements[i].getAttribute("id");
-            if(ranking != thisrank)
-              {
-              //console.log("removing!");
-              document.getElementById(thisid).style.display = 'none';
-              }
-            else
-              {
-              //console.log("leaving!");
-              }
-            //console.log(elements[i].getAttribute("verb"));
-            }
-          }
-        }
       function filterbytag()
         {
         url = document.getElementById('tagfilter').value;
@@ -79,24 +54,11 @@
 
      <table border="0">
        <tr>
-         <td width="33%" align="center">
-
-           <form>
-           <strong>Ranking:</strong>
-           <select name="rankFilter" id="rankFilter">
-             <option value="All">All</option>
-             <option value="10">10</option>
-             <option value="9">9</option>
-             <option value="8">8</option>
-           </select>
-           <input type="button" onclick="filterbyrank();" name="filter_by" value="Go" />
-
-         </td>
 
          <td width="33%" align="center">
 
            <form>
-           <strong>Tag(s):</strong>
+           <strong>Entities:</strong>
            <select name="filter" id="tagfilter">
            {% assign navigation = site.data.navigation | sort: 'label' %}
            {% for nav in navigation %}}
