@@ -14,6 +14,31 @@
          }
        }
 
+      function filterbyrank()
+        {
+        reset();
+
+        ranking = document.getElementById('rankFilter').value;
+        var elements = document.getElementsByClassName('taggedLinkCard taggedLinkCard--red');
+        if(ranking != 'all')
+          {
+          for (var i = 0; i < elements.length; i++)
+            {
+            thisrank = elements[i].getAttribute("rank");
+            thisid = elements[i].getAttribute("id");
+            if(ranking != thisrank)
+              {
+              //console.log("removing!");
+              document.getElementById(thisid).style.display = 'none';
+              }
+            else
+              {
+              //console.log("leaving!");
+              }
+            //console.log(elements[i].getAttribute("verb"));
+            }
+          }
+        }
       function filterbytag()
         {
         url = document.getElementById('tagfilter').value;
@@ -54,13 +79,34 @@
 
      <table border="0">
        <tr>
+         <td width="33%" align="center">
+
+          {% if listing_type == 'topic' %}
+             <form>
+             <strong>Ranking:</strong>
+             <select name="rankFilter" id="rankFilter">
+               <option value="All">All</option>
+               <option value="10">10</option>
+               <option value="9">9</option>
+               <option value="8">8</option>
+             </select>
+             <input type="button" onclick="filterbyrank();" name="filter_by" value="Go" />
+           {% endif %}
+
+         </td>
 
          <td width="33%" align="center">
 
            <form>
-           <strong>Entities:</strong>
+           <strong>Tag(s):</strong>
            <select name="filter" id="tagfilter">
-           {% assign navigation = site.data.navigation | sort: 'label' %}
+
+           {% if listing_type == 'topic' %}
+              {% assign navigation = site.data.topics | sort: 'label' %}
+           {% else %}
+              {% assign navigation = site.data.organizations | sort: 'label' %}
+           {% endif %}
+
            {% for nav in navigation %}}
                <option value="{{ nav.url }}"{% if nav.label == site.tag %} selected{% endif %}>{{ nav.label }}</option>
            {% endfor %}
@@ -71,22 +117,33 @@
 
          <td width="33%" align="center">
 
-           <form>
-           <strong>Verb:</strong>
-           <select name="verbFilter" id="verbFilter">
-             <option value="All">All</option>
-             <option value="GET">GET</option>
-             <option value="POST">POST</option>
-             <option value="PUT">PUT</option>
-             <option value="DELETE">DELETE</option>
-           </select>
-           <input type="button" onclick="filterbyverb();" name="filter_by" value="Go" />
+          {% if listing_type == 'topic' %}
+             <form>
+             <strong>Verb:</strong>
+             <select name="verbFilter" id="verbFilter">
+               <option value="All">All</option>
+               <option value="GET">GET</option>
+               <option value="POST">POST</option>
+               <option value="PUT">PUT</option>
+               <option value="DELETE">DELETE</option>
+             </select>
+             <input type="button" onclick="filterbyverb();" name="filter_by" value="Go" />
+           {% endif %}
 
          </td>
        </tr>
      </table>
 
    </form>
+
+   <table border="0" style="margin-top:35px;" align="center">
+     <tr>
+       <td colspan="3" align="center">
+         <a href="organizations.html"><strong>Group By Organization</strong></a> | <a href="index.html"><strong>List All APIs</strong></a>
+       </td>
+     </tr>
+   </table>
+
 
    </div>
 </section>
