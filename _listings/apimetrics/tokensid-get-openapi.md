@@ -476,7 +476,7 @@ paths:
           [         {             name: Group Name,             rows: [                 {                     call_id:
           __PARENT_ID__,                     location_id:                  },                 {                     call_id:
           __PARENT_ID__,                     location_id:                  }             ]         },         {             name:
-          Group Name 2,             rows: [         '
+          Group Name 2,             rows: ['
         schema:
           $ref: '#/definitions/holder'
       - in: path
