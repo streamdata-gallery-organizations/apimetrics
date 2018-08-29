@@ -1,4 +1,3 @@
----
 swagger: "2.0"
 x-collection-name: APImetrics
 x-complete: 1
@@ -688,4 +687,3 @@ paths:
       tags:
       - Monitoring
       - Workflows
----
